@@ -13,7 +13,17 @@ services:
     volumes:
       - db:/var/lib/postgresql/data
     networks:
-      - graphql-kit-net
+      - cron-kit-net
+
+  redis:
+    container_name: redis
+    image: 'redis:6.0-alpine'
+    ports:
+      - "6379:6379"
+    volumes:
+      - 'redis:/data'
+    networks:
+      - cron-kit-net
 
   api-service:
     build:
@@ -30,12 +40,14 @@ services:
       - PG_USER=postgres
       - PG_PASSWORD=postgres
     networks:
-      - graphql-kit-net
+      - cron-kit-net
     depends_on:
       - db
+      - redis
 
 networks:
-  graphql-kit-net:
+  cron-kit-net:
 
 volumes:
   db:
+  redis:
