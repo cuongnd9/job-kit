@@ -1,6 +1,6 @@
-# sequelize-kit
+# cron-kit
 
-A simple 🎲 KIT to start a new Node project.
+👩🏼‍💻 Cron Job KIT
 
 ## Preparation
 
@@ -23,6 +23,8 @@ const config = {
   pgDB: process.env.PG_DB || 'postgres',
   pgUser: process.env.PG_USER || 'postgres',
   pgPassword: process.env.PG_PASSWORD || 'postgres',
+  redisHost: process.env.REDIS_HOST || 'redis',
+  redisPort: (process.env.REDIS_PORT as number | undefined) || 6379,
 };
 
 export default config;
@@ -47,4 +49,4 @@ yarn docker-compose:rebuild
 
 ## License
 
-MIT © [Cuong Tran](https://github.com/103cuong)
+MIT © [DUY CUONG](https://github.com/103cuong)
