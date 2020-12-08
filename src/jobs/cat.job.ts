@@ -9,8 +9,8 @@ class CatJob {
     cron.schedule('*/2 * * * *', async () => {
       // stuff 😻🖱
       logger.info('😻🖱😻🖱😻🖱😻🖱😻🖱😻🖱');
-      const categories = await CategoryService.getCategories();
-      console.log('json-=================', JSON.stringify(categories))
+      // const categories = await CategoryService.getCategories();
+      // console.log('json-=================', JSON.stringify(categories))
     });
   }
 }
