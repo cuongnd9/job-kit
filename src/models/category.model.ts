@@ -1,6 +1,7 @@
-import { Model, DataTypes, Sequelize } from 'sequelize';
+import { Model, DataTypes } from 'sequelize';
 
-import Cat from './cat.model';
+import { sequelize } from './sequelize';
+import Ground from './ground.model';
 
 class Category extends Model {
   public id: string;
@@ -9,37 +10,35 @@ class Category extends Model {
 
   public createdAt: Date;
 
-  public updatedAt: Date;
-
-  public deletedAt: Date;
-
-  public cats?: Cat[];
-
   static associate() {
-    this.hasMany(Cat, {
-      as: 'cats',
+    this.hasMany(Ground, {
+      as: 'grounds',
       foreignKey: 'categoryId',
     });
   }
 }
 
-const initModel = (sequelize: Sequelize) => {
-  Category.init({
-    id: {
-      type: DataTypes.UUID,
-      primaryKey: true,
-      defaultValue: DataTypes.UUIDV4,
+Category.init({
+  id: {
+    type: DataTypes.UUID,
+    primaryKey: true,
+    defaultValue: DataTypes.UUIDV4,
+  },
+  name: {
+    type: DataTypes.STRING,
+    validate: {
+      notEmpty: true,
     },
-    name: {
-      type: DataTypes.STRING,
-    },
-  }, {
-    sequelize,
-    underscored: true,
-    paranoid: true,
-    tableName: 'category',
-  });
-};
+    unique: true,
+    allowNull: false,
+  },
+  createdAt: {
+    type: DataTypes.DATEONLY,
+  },
+}, {
+  sequelize,
+  modelName: 'CATEGORY',
+  updatedAt: false,
+});
 
-export { initModel };
 export default Category;

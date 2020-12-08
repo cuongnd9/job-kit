@@ -5,9 +5,9 @@ services:
     image: postgres:10.3
     restart: always
     ports:
-      - 5432:5432
+      - 5000:5432
     environment:
-      - POSTGRES_DB=postgres
+      - POSTGRES_DB=sport_booking
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     volumes:
@@ -31,18 +31,18 @@ services:
       dockerfile: Dockerfile.dev
     restart: always
     ports:
-      - 9000:9000
+      - 9100:9100
     environment:
       - NODE_ENV=development
-      - PORT=9000
+      - PORT=9100
       - PG_HOST=db
       - PG_PORT=5432
-      - PG_DB=postgres
+      - PG_DB=sport_booking
       - PG_USER=postgres
       - PG_PASSWORD=postgres
     volumes:
-      - .:/app
-      - ./node_modules:/app/node_modules
+        - .:/app
+        - ./node_modules:/app/node_modules
     networks:
       - cron-kit-net
     depends_on:
