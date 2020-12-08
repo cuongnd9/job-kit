@@ -1,5 +1,5 @@
 {
-  "name": "sequelize-kit",
+  "name": "job-kit",
   "version": "1.0.0",
   "main": "src/index.ts",
   "scripts": {
@@ -35,7 +35,7 @@
     }
   },
   "dependencies": {
-    "4pet-sdk": "^0.4.0",
+    "ioredis": "^4.19.2",
     "joi": "^14.3.1",
     "juno-js": "^0.1.1",
     "lodash": "^4.17.15",
@@ -51,6 +51,7 @@
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
     "@types/chai": "^4.2.11",
     "@types/faker": "^4.1.12",
+    "@types/ioredis": "^4.17.8",
     "@types/joi": "^14.3.4",
     "@types/lodash": "^4.14.150",
     "@types/mocha": "^7.0.2",
