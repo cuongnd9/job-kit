@@ -14,29 +14,32 @@ const sequelize = new Sequelize({
   port: config.pgPort,
   // eslint-disable-next-line no-console
   logging: config.nodeEnv === 'development' ? console.log : false,
+  define: {
+    underscored: false,
+    freezeTableName: true,
+  },
 });
 
-const initSequelize = () => {
-  sequelize
-    .authenticate()
-    .catch((e) => {
-      logger.error('Sequelize authentication failed: ', e);
-    });
+sequelize
+  .authenticate()
+  .catch((e) => {
+    logger.error('Sequelize authentication failed: ', e);
+  });
 
+const associate = () => {
   const models: { [key: string]: any } = {};
   fs
     .readdirSync(__dirname)
     .filter((fileName: string) => /model.[t|j]s/.test(fileName))
     .forEach((fileName) => {
       const model = require(path.resolve(__dirname, fileName));
-      model.initModel(sequelize);
       models[model.default.name] = model.default;
     });
   Object.keys(models).forEach((modelName: string) => {
     if ('associate' in models[modelName]) {
-      models[modelName].associate();
+      models[modelName].associate(models);
     }
   });
 };
 
-export { sequelize, initSequelize };
+export { sequelize, associate };

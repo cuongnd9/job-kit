@@ -1,17 +1,10 @@
 import { sequelize } from '../models/sequelize';
-import Cat from '../models/cat.model';
+// import Cat from '../models/cat.model';
 import Category from '../models/category.model';
 
 class CategoryService {
   static getCategories() {
-    return Category.findAll({
-      include: [
-        {
-          model: Cat,
-          as: 'cats',
-        },
-      ],
-    });
+    return Category.findAll();
   }
 
   static createCategory({ name }: { name: string }) {
