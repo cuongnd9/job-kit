@@ -1,4 +1,5 @@
-import { redis as baseRedis, Redis } from '4pet-sdk';
+import BaseRedis, { Redis } from 'ioredis';
+import { logger } from 'juno-js';
 
 import { config } from '.';
 
@@ -6,7 +7,12 @@ import { config } from '.';
 let redis: Redis;
 
 const initRedis = () => {
-  redis = baseRedis({ host: config.redisHost, port: config.redisPort });
+  redis = new BaseRedis({ host: config.redisHost, port: config.redisPort });
+
+  redis.on('error', (e: any) => {
+    logger.error('Redis connection failed', e);
+    process.exit(0);
+  });
 };
 
 export { initRedis, redis };
