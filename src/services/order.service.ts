@@ -5,11 +5,12 @@ import { logger } from 'juno-js';
 import User from "../models/user.model";
 import SubGround from "../models/subGround.model";
 import { ORDER_STATUS } from "../components/constants";
+import HistoryService from "./history.service";
 
 class OrderService {
   static async getOrders(filter: any) {
 
-    if(filter.outOfTime) {
+    if (filter.outOfTime) {
       return Order.findAll({
         where: {
           status: [ORDER_STATUS.approved, ORDER_STATUS.paid],
@@ -55,6 +56,21 @@ class OrderService {
     } catch (error) {
       if (!order) throw new Error('Order not found');
       throw error;
+    }
+  }
+
+  static async updateStatus(orderId: any, status: any) {
+    const transaction = await sequelize.transaction();
+    try {
+      await Order.update({ status: status }, { where: { id: orderId }, transaction })
+      await HistoryService.createHistory({
+        orderId,
+        orderStatus: status,
+      }, transaction)
+
+      await transaction.commit();
+    } catch (error) {
+      await transaction.rollback();
     }
   }
 }
