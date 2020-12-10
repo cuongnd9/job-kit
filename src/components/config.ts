@@ -8,6 +8,7 @@ const config = {
   pgPassword: process.env.PG_PASSWORD || 'postgres',
   redisHost: process.env.REDIS_HOST || 'redis',
   redisPort: (process.env.REDIS_PORT as number | undefined) || 6379,
+  redisPassword: process.env.REDIS_PASSWORD || 'redis',
 };
 
 export { config };

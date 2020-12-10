@@ -110,8 +110,8 @@ Order.init({
         if (moment(`${startDay} ${startTime}`, 'DD-MM-YYYY HH:mm:ss').isAfter(moment(`${startDay} ${endTime}`, 'DD-MM-YYYY HH:mm:ss'))) {
           throw new Error('Start time shoudld before End time!');
         }
-      }
-    }
+      },
+    },
   },
   endTime: {
     type: DataTypes.TIME,
@@ -132,8 +132,8 @@ Order.init({
         if (moment(`${startDay} ${startTime}`, 'DD-MM-YYYY HH:mm:ss').isAfter(moment(`${startDay} ${endTime}`, 'DD-MM-YYYY HH:mm:ss'))) {
           throw new Error('End time shoudld after Start time!');
         }
-      }
-    }
+      },
+    },
   },
   paymentType: {
     type: DataTypes.ENUM(paymentTypes),

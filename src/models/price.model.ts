@@ -67,8 +67,8 @@ Price.init({
         if (moment(startTime, 'HH:mm:ss').isAfter(moment(endTime, 'HH:mm:ss'))) {
           throw new Error('Start time shoudld before End time!');
         }
-      }
-    }
+      },
+    },
   },
   endTime: {
     type: DataTypes.TIME,
@@ -84,8 +84,8 @@ Price.init({
         if (moment(endTime, 'HH:mm:ss').isBefore(moment(startTime, 'HH:mm:ss'))) {
           throw new Error('End time shoudld after Start time!');
         }
-      }
-    }
+      },
+    },
   },
   // status: {
   //   type: DataTypes.ENUM(subGroundStatus),

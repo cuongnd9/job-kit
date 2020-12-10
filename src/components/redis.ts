@@ -7,7 +7,7 @@ import { config } from '.';
 let redis: Redis;
 
 const initRedis = () => {
-  redis = new BaseRedis({ host: config.redisHost, port: config.redisPort });
+  redis = new BaseRedis({ host: config.redisHost, port: config.redisPort, password: config.redisPassword });
 
   redis.on('error', (e: any) => {
     logger.error('Redis connection failed', e);
